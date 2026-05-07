@@ -23,6 +23,7 @@ function Navbar() {
                 </h1>
                 
                 
+                
                 <ul className="hidden md:flex ml-auto gap-20 mr-15">
                     {ListItems.map((item) => (
                         <li key={item} className="relative group cursor-pointer text-white hover:text-orange-500 transition-colors duration-300 ">
