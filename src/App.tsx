@@ -6,23 +6,28 @@ import Cars from './pages/Cars';
 import CarDetails from './pages/CarDetails';
 import Contact from './pages/Contact';
 import Favorites from './pages/Favorites';
+import Cart from './pages/Cart';
+import { CartProvider } from './context/CartContext';
 
 function App() {
   return (
     <BrowserRouter>
-      <div className="flex flex-col min-h-screen">
-        <Navbar />
-        <main className="flex-1">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/cars" element={<Cars />} />
-            <Route path="/cars/:id" element={<CarDetails />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/favorites" element={<Favorites />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
+      <CartProvider>
+        <div className="flex flex-col min-h-screen">
+          <Navbar />
+          <main className="flex-1">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/cars" element={<Cars />} />
+              <Route path="/cars/:id" element={<CarDetails />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/favorites" element={<Favorites />} />
+              <Route path="/cart" element={<Cart />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </CartProvider>
     </BrowserRouter>
   );
 }

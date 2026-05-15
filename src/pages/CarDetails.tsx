@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { fetchCarById } from '../services/api';
 import type { Car } from '../types/car';
+import { CartContext } from '../context/CartContext';
 
 function CarDetails() {
   const { id } = useParams();
@@ -9,6 +10,8 @@ function CarDetails() {
   const [car, setCar] = useState<Car | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const { addToCart, items } = useContext(CartContext);
+  const inCart = car ? items.some((i) => i.car.id === car.id) : false;
 
   useEffect(() => {
     if (id) {
@@ -117,6 +120,18 @@ function CarDetails() {
               className="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white py-4 rounded-xl font-bold text-base border-none cursor-pointer hover:from-orange-600 hover:to-orange-700 transition-all duration-300 shadow-lg shadow-orange-500/20"
             >
               Inquire About This Car
+            </button>
+
+            <button
+              onClick={() => car && addToCart(car)}
+              disabled={inCart}
+              className={`w-full py-4 rounded-xl font-bold text-base border-none cursor-pointer transition-all duration-300 shadow-lg ${
+                inCart
+                  ? 'bg-green-600 text-white shadow-green-500/20 cursor-default'
+                  : 'bg-white/10 text-white hover:bg-white/20 shadow-white/5'
+              }`}
+            >
+              {inCart ? 'Added to Cart' : 'Add to Cart'}
             </button>
           </div>
         </div>

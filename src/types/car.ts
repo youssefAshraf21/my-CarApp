@@ -16,3 +16,8 @@ export interface NhtsaModel {
   Model_ID: number;
   Model_Name: string;
 }
+
+export interface CartItem {
+  car: Car;
+  quantity: number;
+}
